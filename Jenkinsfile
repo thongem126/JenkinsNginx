@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("Build"){
             steps {
-                sh "sudo docker build -t thongle0610/nginx:jenkins -f Dockerfile ."
+                sh "docker-compose build"
             }
         }
 
