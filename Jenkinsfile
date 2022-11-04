@@ -9,7 +9,7 @@ pipeline {
 
         stage("Push image"){
             steps {
-                sh "echo push image"
+                sh "echo push image 1"
             }
         }
 
