@@ -1,6 +1,6 @@
 version: "3.3"
 services:
   app:
-    image: ddthuong/nginx:latest
+    image: thongle0610/nginx:jenkins
     ports:
       - "80:80"

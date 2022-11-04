@@ -3,7 +3,19 @@ pipeline {
     stages {
         stage("Build"){
             steps {
-                sh "echo hello"
+                sh "docker-compose build"
+            }
+        }
+
+        stage("Push image"){
+            steps {
+                sh "echo push image"
+            }
+        }
+
+        stage("Deploy"){
+            steps {
+                sh "echo deploy"
             }
         }
     }
