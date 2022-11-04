@@ -3,13 +3,13 @@ pipeline {
     stages {
         stage("Build"){
             steps {
-                sh "sudo docker-compose build"
+                sh "docker build -t thongle0610/nginx:jenkins -f Dockerfile ."
             }
         }
 
         stage("Push image"){
             steps {
-                sh "echo push image 123"
+                sh "echo thong"
             }
         }
 
