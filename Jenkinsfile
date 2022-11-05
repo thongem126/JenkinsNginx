@@ -21,7 +21,16 @@ pipeline {
         }
         stage("Deploy"){
             steps {
-                sh "echo deploy 12"
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
+                ansiblePlaybook(
+                    credentialsId: '/home/thongle/Desktop/TrainningJenkins/thongk8s.pem',
+                    playbook: 'playbook.yml',
+                    inventory: 'hosts.ini',
+                    become: 'yes',
+                extraVars: [
+                    DOCKER_USERNAME: "${DOCKER_USERNAME}", 
+                    DOCKER_PASSWORD: "${DOCKER_PASSWORD}" 
+                }
             }
         }
     }
