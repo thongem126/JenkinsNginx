@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    environment {
+        DOCKER_TAG = 'jenkins'
+        DOCKER_IMAGE = "thongle0610/nginx"
+    }
+    
     stages {
         stage("Build"){
             steps {
@@ -11,7 +16,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
                     sh 'echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin'
                 }
-                sh "docker push thongle0610/nginx:jenkins"
+                sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
         }
         stage("Deploy"){
