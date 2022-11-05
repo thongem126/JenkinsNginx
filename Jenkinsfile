@@ -23,7 +23,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
                 ansiblePlaybook(
-                    credentialsId: '/home/thongle/Desktop/TrainningJenkins/thongk8s.pem',
+                    credentialsId: 'ubuntu',
                     playbook: 'playbook.yml',
                     inventory: 'hosts.ini',
                     become: 'yes',
