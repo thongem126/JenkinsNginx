@@ -14,6 +14,7 @@
     - name: pull an image
       docker_image:
           name: thongle0610/nginx:jenkins
+          source: pull
     - name: Create a container
       docker:
         name: mynginx
