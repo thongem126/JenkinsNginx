@@ -17,7 +17,7 @@
         source: pull
     - name: Create a container
       community.docker.docker_container:
-        name: mynginx
+        name: mynginx1
         image: thongle0610/nginx:jenkins
         command: sleep 1d
         state: started
