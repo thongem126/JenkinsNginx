@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_TAG = 'jenkins'
         DOCKER_IMAGE = 'thongle0610/nginx'
-        ANSIBLE_HOST = '/var/lib/jenkins/workspace/'
+        ANSIBLE_HOST = '/var/lib/jenkins/workspace/testjenkins'
 
 
     }
