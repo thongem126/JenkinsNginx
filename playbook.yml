@@ -16,7 +16,7 @@
           name: thongle0610/nginx:jenkins
           source: pull
     - name: Create a container
-      docker:
+      docker_container:
         name: mynginx
         image: thongle0610/nginx:jenkins
         command: sleep 1d
