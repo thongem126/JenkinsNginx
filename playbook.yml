@@ -2,8 +2,6 @@
 - hosts: server
   remote_user: ubuntu
   become: yes
-  vars:
-    default_container_image: ubuntu
   tasks:
     - name: Install Docker
       apt:
