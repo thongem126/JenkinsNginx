@@ -24,7 +24,6 @@ pipeline {
         }
         stage("Deploy"){
             steps {
-                tools {ansible "ansible"}
                 dir("$ANSIBLE_HOST"){
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
                         ansiblePlaybook(
