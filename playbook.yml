@@ -15,7 +15,7 @@
       docker_image:
           name: thongle0610/nginx:jenkins
     - name: Create a container
-      community.docker.docker_container:
+      docker:
         name: mynginx
         image: thongle0610/nginx:jenkins
         command: sleep 1d
