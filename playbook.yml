@@ -11,10 +11,9 @@
         state: present
     - name: Login DockerHub
       shell: docker login -u "{{DOCKER_USERNAME}}" -p "{{DOCKER_PASSWORD}}"
-    - name: Pull default Docker image
-      community.docker.docker_image:
-        name: thongle0610/nginx:jenkins
-        source: pull
+    - name: pull an image
+      docker_image:
+          name: thongle0610/nginx:jenkins
     - name: Create a container
       community.docker.docker_container:
         name: mynginx
