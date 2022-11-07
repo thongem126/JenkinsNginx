@@ -2,7 +2,10 @@ pipeline {
     agent any
     environment {
         DOCKER_TAG = 'jenkins'
-        DOCKER_IMAGE = "thongle0610/nginx"
+        DOCKER_IMAGE = 'thongle0610/nginx'
+        ANSIBLE_HOST = "/var/lib/jenkins/workspace/testjenkins"
+
+
     }
     
     stages {
@@ -20,20 +23,24 @@ pipeline {
             }
         }
         stage("Deploy"){
+            
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
-                ansiblePlaybook(
-                    credentialsId: 'ubuntu',
-                    playbook: 'playbook.yml',
-                    inventory: 'hosts.ini',
-                    become: 'yes',
-                extraVars: [
-                    DOCKER_USERNAME: "${DOCKER_USERNAME}", 
-                    DOCKER_PASSWORD: "${DOCKER_PASSWORD}" 
-                    ]
-                )
+                dir('$ANSIBLE_HOST'){
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
+                        ansiblePlaybook(
+                            credentialsId: 'ubuntu',
+                            playbook: 'playbook.yml',
+                            inventory: 'hosts.ini',
+                            become: 'yes',
+                        extraVars: [
+                            DOCKER_USERNAME: "${DOCKER_USERNAME}", 
+                            DOCKER_PASSWORD: "${DOCKER_PASSWORD}" 
+                            ]
+                        )
+                    }
+                }
             }
         }
     }
-}}
+}
 
