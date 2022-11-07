@@ -2,6 +2,8 @@
 - hosts: server
   remote_user: ubuntu
   become: yes
+  vars:
+    default_container_image: ubuntu
   tasks:
     - name: Install Docker
       apt:
@@ -11,15 +13,19 @@
         state: present
     - name: Login DockerHub
       shell: docker login -u "{{DOCKER_USERNAME}}" -p "{{DOCKER_PASSWORD}}"
-    - name: Copy file
-      copy:
-        src: docker-compose.yaml
-        dest: /home/ubuntu/
-    - name: Restart docker-compose
-      shell: |
-          docker-compose stop
-          docker-compose rm -f
-          docker-compose pull
-          docker-compose up -d
+    - name: Pull default Docker image
+      community.docker.docker_image:
+        name: thongle0610/nginx:jenkins
+        source: pull
+    - name: Create a container
+      community.docker.docker_container:
+        name: mynginx
+        image: thongle0610/nginx:jenkins
+        command: sleep 1d
+        state: started
+        # recreate: yes
+        ports:
+          - "80:8080"
+          - "443:8443"
 ...
   

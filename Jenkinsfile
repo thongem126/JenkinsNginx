@@ -30,6 +30,7 @@ pipeline {
                 extraVars: [
                     DOCKER_USERNAME: "${DOCKER_USERNAME}", 
                     DOCKER_PASSWORD: "${DOCKER_PASSWORD}" 
+                    DOCKER_TAG: 'jenkins'
                     ]
                 )
             }
