@@ -23,7 +23,7 @@
       #   image: thongle0610/nginx:jenkins
       #   command: sleep 1d
       #   state: started
-      shell: docker run -d -p 8087:80 thongle0610/nginx:jenkins
+      shell: docker run -d -p 8088:80 thongle0610/nginx:jenkins
         # recreate: yes
 ...
   
