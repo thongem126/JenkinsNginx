@@ -12,10 +12,7 @@
     - name: Login DockerHub
       shell: docker login -u "{{DOCKER_USERNAME}}" -p "{{DOCKER_PASSWORD}}"
     - name: Remove image
-      docker_image:
-        state: absent
-        name: thongle0610/nginx
-        tag: jenkins
+      shell: docker rmi thongle0610/nginx:jenkins -f
     - name: pull an image
       docker_image:
           name: thongle0610/nginx:jenkins
