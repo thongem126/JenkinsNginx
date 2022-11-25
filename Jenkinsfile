@@ -3,9 +3,6 @@ pipeline {
     environment {
         DOCKER_TAG = 'jenkins'
         DOCKER_IMAGE = 'thongle0610/nginx'
-        ANSIBLE_HOST = '/var/lib/jenkins/workspace/testjenkins'
-
-
     }
     
     stages {
@@ -24,19 +21,17 @@ pipeline {
         }
         stage("Deploy"){
             steps {
-                dir("$ANSIBLE_HOST"){
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
-                        ansiblePlaybook(
-                            credentialsId: 'key-ssh-jenkins',
-                            playbook: 'playbook.yml',
-                            inventory: 'hosts.ini',
-                            become: 'yes',
-                        extraVars: [
-                            DOCKER_USERNAME: "${DOCKER_USERNAME}", 
-                            DOCKER_PASSWORD: "${DOCKER_PASSWORD}" 
-                            ]
-                        )
-                    }
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
+                    ansiblePlaybook(
+                        credentialsId: 'key-ssh-jenkins',
+                        playbook: 'playbook.yml',
+                        inventory: 'hosts.ini',
+                        become: 'yes',
+                    extraVars: [
+                        DOCKER_USERNAME: "${DOCKER_USERNAME}", 
+                        DOCKER_PASSWORD: "${DOCKER_PASSWORD}" 
+                        ]
+                    )
                 }
             }
         }
