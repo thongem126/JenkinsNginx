@@ -3,6 +3,8 @@
   remote_user: ubuntu
   become: yes
   tasks:
+    - name: Update repo
+      shell: sudo apt update
     - name: Install Docker
       apt:
         name:
