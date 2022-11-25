@@ -15,15 +15,15 @@
       shell: docker rmi thongle0610/nginx:jenkins -f
     - name: pull an image
       docker_image:
-          name: thongle0610/nginx:jenkins
-          source: pull
+        name: thongle0610/nginx:jenkins
+        source: pull
     - name: Create a container
       # docker_container:
       #   name: mynginx
       #   image: thongle0610/nginx:jenkins
       #   command: sleep 1d
       #   state: started
-      shell: docker run -d -p 8000:80 thongle0610/nginx:jenkins
+      shell: docker run -d -p 8001:80 thongle0610/nginx:jenkins
         # recreate: yes
 ...
   
